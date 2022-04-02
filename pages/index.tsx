@@ -1,34 +1,48 @@
-import type { NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { PostCard, Categories, PostWidget } from '../components'
 
-const posts = [
-  { title: 'React Testing', except: 'Learn React Testing' },
-  { title: 'React with Tailwind', except: 'Learn React with Tailwind' },
-]
+import { getPosts } from '../services'
 
-const Home: NextPage = () => {
+// const posts = [
+//   { title: 'React Testing', except: 'Learn React Testing' },
+//   { title: 'React with Tailwind', except: 'Learn React with Tailwind' },
+// ]
+
+interface Props {
+  posts: any[];
+}
+const Home: NextPage<Props> = ({ posts }) => {
   return (
-    <div className="container mx-auto mb-8 bg-gray-100 px-10">
+    <div className="container mx-auto mb-8 px-10">
       <Head>
         <title>CMS Blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
-        <div className='lg:col-span-8 col-span-1'>
-          {posts.map((post) => <PostCard post={post} key={post.title} />)}          
+        <div className="col-span-1 lg:col-span-8">
+          {posts.map((post) => (
+            <PostCard post={post.node} key={post.title} />
+          ))}
         </div>
 
-        <div className=" lg:col-span-4 col-span-1 ">
-          <div className='lg:sticky relative top-8'>
-            <PostWidget/>
-            <Categories/>
+        <div className=" col-span-1 lg:col-span-4 ">
+          <div className="relative top-8 lg:sticky">
+            <PostWidget />
+            <Categories />
           </div>
         </div>
       </div>
     </div>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const posts = (await getPosts()) || []
+  return {
+    props: { posts },
+  }
 }
 
 export default Home
