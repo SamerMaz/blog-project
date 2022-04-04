@@ -1,13 +1,21 @@
-import React, { useContext } from 'react'
-
+import React, { useContext,useState, useEffect } from 'react'
+import { getCategories } from '../services'
 import Link from 'next/link'
 
-const categories = [
-  { name: 'React', slug: 'react' },
-  { name: 'Web development', slug: 'web-dev' }
-]
+interface ICategories {
+  categories: [],
+  slug:string,
+  name:string
+}
 
 const Header: React.FC = () => {
+ const [categories, setCategories] =useState<ICategories[] | null>(null)
+
+ useEffect(()=>{
+   getCategories()
+     .then((newCategories:any)=> setCategories(newCategories))
+},[])
+
   return (
     <div className="container mx-auto mb-8 px-10">
       <div className="inline-block w-full border-b border-blue-400 py-8">
@@ -20,7 +28,7 @@ const Header: React.FC = () => {
         </div>
         <div className="hidden md:float-left md:contents">
        
-          {categories.map((category) => (
+          {categories?.map((category) => (
             // {console.log(category.name)}
             <Link key={category.slug} href={`/category/${category.slug}`}>
               <span className="md:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer">

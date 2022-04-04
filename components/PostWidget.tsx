@@ -49,8 +49,10 @@ console.log("RelatedPosts",relatedPosts)
             <p className='text-gray-500 font-xs'>
               {moment(post.createdAt).format('MMM DD, YYYY')}
             </p>
-            <Link href={`/post/${post.slug}`} key={post.title} className="text-md">
-              {post.title}
+            <Link href={`/post/${post.slug}`} key={post.title} >
+              <a className='text-base'>
+                {post.title}
+              </a>
             </Link>
           </div>
         </div>
