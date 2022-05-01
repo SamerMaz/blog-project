@@ -4,7 +4,7 @@ import { request, gql } from 'graphql-request'
 const graphqlAPI: string = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT as string
 console.log(graphqlAPI)
 
-export const getPosts = async (): Promise<string> => {
+export const getPosts = async (): Promise<string[]> => {
   const query: string = gql`
     query MyQuery {
       postsConnection {
@@ -38,6 +38,41 @@ export const getPosts = async (): Promise<string> => {
   return result.postsConnection.edges
 }
 
+export const getPostDetails = async (slug:string): Promise<string> => {
+  const query: string = gql`
+    query GetPostDetails($slug: String!) {
+      post(where: { slug: $slug}){
+            author {
+              bio
+              id
+              name
+              photo {
+                url
+              }
+            }
+            createdAt
+            slug
+            title
+            excerpt
+            featuredImage {
+              url
+            }
+      
+      categories {
+        name
+        slug
+      }
+      content {
+        raw
+      }
+    }
+  }
+  `
+  const result = await request(graphqlAPI, query, { slug })
+  return result.post;
+}
+
+
 export const getRecentPosts = async():Promise<String> =>{
   const query: string = gql`
     query GetPostDetails(){
@@ -60,7 +95,7 @@ export const getRecentPosts = async():Promise<String> =>{
   return result.posts;
 }
 
-export const getSimilarPosts = async():Promise<String>=>{
+export const getSimilarPosts = async(categories:string, slug:string):Promise<String>=>{
   const query: string = gql`
       query GetPostDetails($slug: String!, $categories: [String!]){
         posts(
@@ -76,7 +111,7 @@ export const getSimilarPosts = async():Promise<String>=>{
         }
       }
   `
-    const result = await request(graphqlAPI, query);
+    const result = await request(graphqlAPI, query, { categories, slug});
     return result.posts
 }
 

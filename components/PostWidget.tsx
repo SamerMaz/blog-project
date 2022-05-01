@@ -4,8 +4,6 @@ import Link from 'next/link'
 import { getRecentPosts, getSimilarPosts } from '../services'
 
 
-
-
 type Props= {
   categories: string,
   slug:string
