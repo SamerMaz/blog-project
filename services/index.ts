@@ -130,3 +130,33 @@ export const getCategories = async ():Promise<String> =>{
     return result.categories;
 
 }
+//Creating our own api without having a separate node.js server
+export const submitComment = async(obj:any):Promise<String> =>{
+  const result:Response= await fetch('/api/comments', { 
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(obj)
+  })
+
+  return result.json();
+}
+
+
+export const getComments = async (slug: string):Promise<String> => {
+  const query:string = gql`
+    query GetComments($slug: String!){
+      comments(where: { post: { slug: $slug }}) {
+        name
+        createdAt
+        comment
+      }
+    }
+  `
+
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.comments;
+}
+

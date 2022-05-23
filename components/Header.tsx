@@ -4,8 +4,8 @@ import Link from 'next/link'
 
 interface ICategories {
   categories: [],
-  slug:string,
-  name:string
+  slug?:string,
+  name?:string
 }
 
 const Header: React.FC = () => {
