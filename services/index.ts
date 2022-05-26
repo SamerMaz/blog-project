@@ -1,7 +1,9 @@
 import { graphql } from 'graphql'
 import { request, gql } from 'graphql-request'
+import { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server'
 
-const graphqlAPI: string = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT as string
+const graphqlAPI= process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT as string
 console.log(graphqlAPI)
 
 export const getPosts = async (): Promise<string[]> => {
@@ -130,6 +132,7 @@ export const getCategories = async ():Promise<String> =>{
     return result.categories;
 
 }
+
 //Creating our own api without having a separate node.js server
 export const submitComment = async(obj:any):Promise<String> =>{
   const result:Response= await fetch('/api/comments', { 
@@ -160,3 +163,27 @@ export const getComments = async (slug: string):Promise<String> => {
   return result.comments;
 }
 
+export const getFeaturedPosts = async ():Promise<String> => {
+  const query:string = gql`
+  query GetCategoryPost() {
+    posts(where: {featuredPost: true}) {
+      author {
+        name
+        photo {
+          url
+        }
+      }
+      featuredImage {
+        url
+      }
+      title
+      slug
+      createdAt
+    }
+  }
+`;
+
+  const result = await request(graphqlAPI, query);
+
+  return result.posts
+}
