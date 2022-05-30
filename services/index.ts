@@ -4,13 +4,13 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { NextRequest, NextResponse } from 'next/server'
 
 const graphqlAPI= process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT as string
-console.log(graphqlAPI)
 
 export const getPosts = async (): Promise<string[]> => {
   const query: string = gql`
     query MyQuery {
       postsConnection {
         edges {
+          cursor
           node {
             author {
               bio
@@ -27,13 +27,14 @@ export const getPosts = async (): Promise<string[]> => {
             featuredImage {
               url
             }
+            categories {
+              name
+              slug
+            }
           }
         }
       }
-      categories {
-        name
-        slug
-      }
+     
     }
   `
   const result = await request(graphqlAPI, query)
@@ -117,7 +118,7 @@ export const getSimilarPosts = async(categories:string, slug:string):Promise<Str
     return result.posts
 }
 
-export const getCategories = async ():Promise<String> =>{
+export const getCategories = async ():Promise<any[]> =>{
   const query:string = gql`
     query GetCategories {
       categories {
@@ -186,4 +187,40 @@ export const getFeaturedPosts = async ():Promise<String> => {
   const result = await request(graphqlAPI, query);
 
   return result.posts
+}
+
+export const getCategoryPost = async (slug:string):Promise<String>=>{
+  const query:string = gql`
+  query GetCategoryPost($slug: String!) {
+    postsConnection(where: {categories_some: {slug: $slug}}){
+      edges {
+        cursor
+        node {
+          author{
+          bio
+          name
+          id
+          photo {
+            url
+          }
+        }
+        createdAt
+        slug
+        title
+        excerpt
+        featuredImage {
+          url
+        }
+        categories {
+          name
+          slug
+        }
+      }
+      }
+    }
+  }`;
+  
+  const result = await request(graphqlAPI, query, { slug });
+
+  return result.postsConnection.edges;
 }
