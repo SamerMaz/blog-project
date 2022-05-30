@@ -18,15 +18,22 @@ interface IComments {
 const Comments:React.FC<Props> = ({slug}) => {
 
   const [comments, setComments] = useState<IComments[] | null>(null);
-  console.log(comments);
  //use effect here is didMOunt it will happen at the start 
   useEffect(()=>{
-    getComments(slug)
-      .then((result:any)=> setComments(result))
-  })
+    // const ac = new AbortController();
+    // Promise.all([
+      getComments(slug)
+      
+    
+    // ])
+    .then((result:any)=> setComments(result))
+    .catch(ex=>console.log(ex))
+
+    // return ()=>ac.abort();
+  }
+  )
   return (
     <>
-    {/* {console.log(comments.length)} */}
       {(comments?.length || 0) > 0  && (
         <div className='bg-white shadow-lg rounded-lg p-8 pb-12 mb-8'>
           <h3 className='text-xl mb-8 font-semibold border-b pb-4'>
