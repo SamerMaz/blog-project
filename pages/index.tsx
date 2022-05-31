@@ -15,7 +15,6 @@ interface Props {
   posts: any[];
 }
 const Home: NextPage<Props> = ({ posts }) => {
-  // console.log("POPSOSTOPSOTS", posts);
   return (
     <div className="container mx-auto mb-8 px-10">
       <FeaturedPosts/>

@@ -78,7 +78,6 @@ const PostDetail:React.FC<Props> = ({ post}) => {
           
         </div>
         <h1 className='mb-8 text-3xl font-semibold'>{post.title}</h1>
-        {console.log(post.content.raw)}
         {post.content.raw.children.map((typeObj: any, index: number)=>{
           const children = typeObj.children.map((item:any , itemIndex:any)=> getContentFragment(itemIndex, item.text, item))
         

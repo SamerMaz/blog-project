@@ -17,7 +17,6 @@ type Data = {
 }
 
 export default async function comments( req: NextApiRequest, res: NextApiResponse<Data>) {
-  // console.log({graphCmsToken})
   const graphQlClient = new GraphQLClient((graphqlAPI), {
     headers: {
       authorization: `Bearer ${graphCmsToken}`
@@ -32,12 +31,10 @@ export default async function comments( req: NextApiRequest, res: NextApiRespons
 
   try {
     const result = await graphQlClient.request(query, req.body)
-    console.log({result})
     return res.status(200).send(result)
 
     
   } catch (e:any) {
-    // console.log({error})
     return res.status(500).send(e)
 
   }

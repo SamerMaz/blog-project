@@ -25,7 +25,6 @@ const PostWidget:React.FC<Props> = ({categories, slug}) => {
    }
   }, [slug])
   
-console.log("RelatedPosts",relatedPosts)
 
   return (
     <div className='bg-white shadow-lg rounded-lg p-8 mb-8'>
