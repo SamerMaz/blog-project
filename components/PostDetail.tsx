@@ -8,7 +8,7 @@ type Props={
 
 
 const PostDetail:React.FC<Props> = ({ post}) => {
-  const getContentFragment = (index:number, text:JSX.Element | any, obj:any, type:any) =>{
+  const getContentFragment = (index:number, text:JSX.Element | any, obj:any, type?:any) =>{
     let modifiedText = text;
 
     if(obj){
