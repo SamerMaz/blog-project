@@ -47,7 +47,7 @@ const FeaturedPosts:React.FC = () => {
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
       </svg>
     </div>
-  )
+  );
 
   const customRightArrow = (
     <div className="absolute arrow-btn right-0 text-center py-3 cursor-pointer bg-blue-800 rounded-full">
@@ -60,7 +60,7 @@ const FeaturedPosts:React.FC = () => {
   
   return (
     <div className='mb-8'>
-      <Carousel  customLeftArrow={customLeftArrow} customRightArrow={customRightArrow} responsive={responsive} itemClass='px-4'>
+      <Carousel  infinite customLeftArrow={customLeftArrow} customRightArrow={customRightArrow} responsive={responsive} itemClass='px-4'>
         {dataLoaded && featuredPosts?.map((post, index) => (
           <FeaturedPostCard key={index} post={post}/>
         ))}
