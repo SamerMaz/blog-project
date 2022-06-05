@@ -21,17 +21,14 @@ const Comments:React.FC<Props> = ({slug}) => {
  //use effect here is didMOunt it will happen at the start 
   useEffect(()=>{
     // const ac = new AbortController();
-    // Promise.all([
       getComments(slug)
-      
-    
-    // ])
+  
     .then((result:any)=> setComments(result))
     .catch(ex=>console.log(ex))
 
     // return ()=>ac.abort();
-  }
-  )
+  }, [])
+  
   return (
     <>
       {(comments?.length || 0) > 0  && (
