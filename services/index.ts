@@ -164,7 +164,7 @@ export const getComments = async (slug: string):Promise<String> => {
   return result.comments;
 }
 
-export const getFeaturedPosts = async ():Promise<String> => {
+export const getFeaturedPosts = async (/*{signal}:any*/):Promise<String> => {
   const query:string = gql`
   query GetCategoryPost() {
     posts(where: {featuredPost: true}) {
