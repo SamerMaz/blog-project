@@ -2,7 +2,7 @@
 
 <img src="./public/Screenshot-webApp.png" width="500">
 
-### <a href="https://www.google.com/" target="_blank">Live Site</a>
+### <a href="https://blog-project-samermaz.vercel.app/" target="_blank">Live Site</a>
 
 ## Description
 CMS Blog Application With featured and recent posts, categories. full markdown articles, author information, comments it's fully responsive Application. It's a tutorial from
