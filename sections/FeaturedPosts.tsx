@@ -51,7 +51,7 @@ const FeaturedPosts:React.FC = () => {
     // };
 // return ()=>ac.abort();
 
-  }, [])
+  }, []);
   
   const ArrowFix = (arrowProps:any) => { const {carouselState, children, ...restArrowProps} = arrowProps; return ( <span {...restArrowProps}> {children} </span> ); };
 
