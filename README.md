@@ -5,7 +5,7 @@
 ### <a href="https://blog-project-samermaz.vercel.app/" target="_blank">Live Site</a>
 
 ## Description
-CMS Blog Application With featured and recent posts, categories. full markdown articles, author information, comments it's fully responsive Application. It's a tutorial from
+CMS Blog Application With featured and recent posts, categories, full markdown articles, author information, comments a fully responsive Application. It's a tutorial from
 <a href="https://github.com/adrianhajdin/project_graphql_blog" target="_blank">adrianhajdin </a> know as javascriptmastery on youtube he build the project using **NextJs**, **TailwindCSS**, **GraphQL** and **GraphCMS** and **Vercel** for deploying.
 GraphCMS is a headless content management system based on GraphQL technology enabling seamless integration with any application. It's a great <a href="https://www.youtube.com/watch?v=HYv55DhgTuA" target="_blank">tutorial </a> where i learned the technologies mentioned and try to make it more challenged with adding **Typescript** to it.     
 
